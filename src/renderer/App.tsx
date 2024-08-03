@@ -1,29 +1,31 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  MemoryRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 import './App.css';
 import 'tailwindcss/tailwind.css';
-
-function Hello() {
-  return (
-    <div>
-      <h1 className="text-4xl font-nunito-sans">Hello world</h1>
-      <h1 className="text-4xl font-manrope">Another Hello</h1>
-      <img
-        src="https://www.w3schools.com/images/lamp.jpg"
-        alt="Lamp"
-        width="32"
-        height="32"
-      />
-    </div>
-  );
-}
+import PerusahaanScreen from './screens/PerusahaanScreen';
+import CoaScreen from './screens/CoaScreen';
+import HeaderLayout from './screens/layouts/HeaderLayout';
+import SidebarLayout from './screens/layouts/SidebarLayout';
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Hello />} />
-      </Routes>
-    </Router>
+    <div className="font-nunito-sans">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/perusahaan/index" />} />
+          <Route path="/perusahaan" element={<HeaderLayout />}>
+            <Route path="/perusahaan/index" element={<PerusahaanScreen />} />
+          </Route>
+          <Route path="/dashboard" element={<SidebarLayout />}>
+            <Route path="/dashboard/coa" element={<CoaScreen />} />
+          </Route>
+        </Routes>
+      </Router>
+    </div>
   );
 }
